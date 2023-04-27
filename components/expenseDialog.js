@@ -8,6 +8,7 @@ import { addReceipt, updateReceipt } from '../firebase/firestore';
 import { replaceImage, uploadImage } from '../firebase/storage';
 import { RECEIPTS_ENUM } from '../pages/dashboard';
 import styles from '../styles/expenseDialog.module.scss';
+import useGeoLocation from './hooks/useGeoLocation'
 
 const DEFAULT_FILE_NAME = "No file selected";
 const DEFAULT_FORM_STATE = {
@@ -27,23 +28,7 @@ export default function ExpenseDialog(props) {
   const { authUser } = useAuth();
   const [formFields, setFormFields] = useState(isEdit ? props.edit : DEFAULT_FORM_STATE);
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [lat, setLat] = useState(0);
-  const [lon, setLon] = useState(0);
-  const [locationLoaded, setLocationLoaded] = useState(false);
-
-  useEffect(() => {
-     const current = navigator.geolocation.getCurrentPosition((location) => {
-      setLocationLoaded(true);
-      setLat(location.coords.latitude);
-      setLon(location.coords.longitude);
-    }, (err) => {
-      console.log(err)
-    }, {
-      enableHighAccuracy: true,
-    })
-    
-    return () => navigator.geolocation.getCurrentPosition(current)
-  }, []);
+  const location = useGeoLocation();
 
   useEffect(() => {
     if (props.showDialog) {
@@ -119,7 +104,7 @@ export default function ExpenseDialog(props) {
             />
           </LocalizationProvider>
         </Stack>
-        <Button variant="outlined" component="label" color="secondary">Use Current Location</Button>
+        <Button variant="outlined" component="label" color="secondary" onClick={location}>Use Current Location</Button>
         <TextField color="tertiary" label="Location name" variant="standard" value={formFields.locationName} onChange={(event) => updateFormField(event, 'locationName')} />
         <TextField color="tertiary" label="Location address" variant="standard" value={formFields.address} onChange={(event) => updateFormField(event, 'address')} />
         <TextField color="tertiary" label="Items" variant="standard" value={formFields.items} onChange={(event) => updateFormField(event, 'items')} />

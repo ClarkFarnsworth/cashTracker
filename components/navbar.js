@@ -14,6 +14,7 @@ export default function NavBar() {
               CASH TRACKER
             </Typography>
             <Stack direction="row" spacing={2} sx={{ alignItems: "center" }}>
+              <Button variant="text" color="secondary"> Map </Button>
               <Typography variant="h6" sx={{ flexGrow: 1 }}>
                 {authUser?.email}
               </Typography>
