@@ -5,6 +5,14 @@ import styles from '../styles/navbar.module.scss';
 export default function NavBar() {
   const { authUser, signOut } = useAuth();
 
+  const mapApi = async () => {
+    console.log("I've been clicked")
+    const response = await fetch(URL);
+    const body = await response.json();
+    console.log(body);
+    
+  };
+
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static" className={styles.appbar}>
@@ -14,7 +22,7 @@ export default function NavBar() {
               CASH TRACKER
             </Typography>
             <Stack direction="row" spacing={2} sx={{ alignItems: "center" }}>
-              <Button variant="text" color="secondary"> Map </Button>
+              <Button variant="text" color="secondary" onClick={mapApi}> Map </Button>
               <Typography variant="h6" sx={{ flexGrow: 1 }}>
                 {authUser?.email}
               </Typography>
