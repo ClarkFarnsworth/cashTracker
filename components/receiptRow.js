@@ -22,7 +22,7 @@ export default function ReceiptRow(props) {
                         </Stack>
                         <Stack direction="column" sx={{ flexGrow: 1 }}>
                             <Typography variant="h5">
-                                {receipt.locationName} ({receipt.address})
+                                {receipt.locationName}
                             </Typography>
                             <Typography variant="h5">
                                 {receipt.items}

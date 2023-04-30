@@ -12,7 +12,6 @@ import styles from '../styles/expenseDialog.module.scss';
 
 const DEFAULT_FILE_NAME = "No file selected";
 const DEFAULT_FORM_STATE = {
-  address: "",
   amount: "",
   date: null,
   fileName: DEFAULT_FILE_NAME,
@@ -37,7 +36,7 @@ export default function ExpenseDialog(props) {
   }, [props.edit, props.showDialog])
 
   const isDisabled = () => formFields.fileName === DEFAULT_FILE_NAME || !formFields.date || formFields.locationName.length === 0 
-                     || formFields.address.length === 0 || formFields.items.length === 0 || formFields.amount.length === 0;
+                     || formFields.items.length === 0 || formFields.amount.length === 0;
 
   const updateFormField = (event, field) => {
     setFormFields(prevState => ({...prevState, [field]: event.target.value}))
@@ -62,10 +61,10 @@ export default function ExpenseDialog(props) {
         if (formFields.fileName) {
           await replaceImage(formFields.file, formFields.imageBucket);
         }
-        await updateReceipt(formFields.id, authUser.uid, formFields.date, formFields.locationName, formFields.address, formFields.items, formFields.amount, formFields.imageBucket);
+        await updateReceipt(formFields.id, authUser.uid, formFields.date, formFields.locationName, formFields.items, formFields.amount, formFields.imageBucket);
       } else {
         const bucket = await uploadImage(formFields.file, authUser.uid);
-        await addReceipt(authUser.uid, formFields.date, formFields.locationName, formFields.address, formFields.items, formFields.amount, bucket);
+        await addReceipt(authUser.uid, formFields.date, formFields.locationName, formFields.items, formFields.amount, bucket);
       }
       props.onSuccess(isEdit ? RECEIPTS_ENUM.edit : RECEIPTS_ENUM.add);
     } catch (error) {
@@ -104,9 +103,7 @@ export default function ExpenseDialog(props) {
             />
           </LocalizationProvider>
         </Stack>
-        <Button variant="outlined" component="label" color="secondary" >Use Current Location</Button>
         <TextField color="tertiary" label="Location name" variant="standard" value={formFields.locationName} onChange={(event) => updateFormField(event, 'locationName')} />
-        <TextField color="tertiary" label="Location address" variant="standard" value={formFields.address} onChange={(event) => updateFormField(event, 'address')} />
         <TextField color="tertiary" label="Items" variant="standard" value={formFields.items} onChange={(event) => updateFormField(event, 'items')} />
         <TextField color="tertiary" label="Amount" variant="standard" value={formFields.amount} onChange={(event) => updateFormField(event, 'amount')} />
       </DialogContent>
