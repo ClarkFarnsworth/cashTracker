@@ -1,16 +1,14 @@
 import { AppBar, Box, Button, Container, Stack, Toolbar, Typography } from '@mui/material';
 import { useAuth } from '../firebase/auth';
 import styles from '../styles/navbar.module.scss';
+import { useRouter } from 'next/router';
 
 export default function NavBar() {
   const { authUser, signOut } = useAuth();
+  const router = useRouter();
 
-  const mapApi = async () => {
-    console.log("I've been clicked")
-    const response = await fetch(URL);
-    const body = await response.json();
-    console.log(body);
-    
+  const mapApi = () => {
+    router.push('/map');
   };
 
   return (
