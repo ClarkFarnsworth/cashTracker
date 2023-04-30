@@ -1,16 +1,16 @@
 
 /* Colors */
-$primary: #FAFAFA;
-$secondary: #1a73e8;
-$darkSecondary: #1B3A57;
-$success: #00BFA5;
-$error: #FF5252;
+$primary: #DDDFD4;
+$secondary: #3FB0AC;
+$darkSecondary: #173E43;
+$success: #34421E; 
+$error: #FA292A; 
 $dropShadow: $darkSecondary;
 $dropShadowOpacity: 20%;
 
 /* Fonts */
-$font-type: "Google Sans", "Roboto", sans-serif;
-$font-title: "Google Sans Mono", "Courier New", serif;
+$font-type: "Segoe Print", "Courier New", monospace;
+$font-title: "Franklin Gothic Medium", "Courier New", monospace;
 $font-color: $darkSecondary;
 
 :export {
