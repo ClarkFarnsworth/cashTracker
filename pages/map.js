@@ -9,7 +9,7 @@ export default function Map() {
         googleMapApiKey: process.env.NEXT_PUBLIC_GOOGLE_MAP_API_KEY,
         libraries: ["places"],
     });
-    const center = useMemo(() => ({lat:44, lng: -80}), []);
+    const center = useMemo(() => ({lat:41.7370, lng: -111.8338}), []);
     const [selected, setSelected] = useState(null);
 
     if (!isLoaded) return <div>Loading...</div>;
